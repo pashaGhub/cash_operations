@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import AppContext from "../../AppContext";
 import "./index.scss";
 
-function Dashboard({
-  data,
-  cashInFee,
-  cashOutNaturalFee,
-  cashOutJuridicalFee
-}) {
+function Dashboard() {
+  const {
+    operations,
+    cashInFee,
+    cashOutNaturalFee,
+    cashOutJuridicalFee
+  } = useContext(AppContext);
+
   return (
     <div className="Dashboard">
       <h3>Result</h3>
       <ul>
-        {data.map((item, ind) => {
+        {operations.map((item, ind) => {
           const {
             date,
             user_id,
