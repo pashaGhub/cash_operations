@@ -1,25 +1,12 @@
 const exress = require("express");
+const operations = require("./input");
 
 const app = exress();
 
-app.get("/api/operations", (req, res) => {
-  const operations = [
-    {
-      date: "2016-01-05",
-      user_id: 1,
-      user_type: "natural",
-      type: "cash_in",
-      operation: { amount: 200.0, currency: "EUR" }
-    },
-    {
-      date: "2016-01-06",
-      user_id: 2,
-      user_type: "juridical",
-      type: "cash_out",
-      operation: { amount: 300.0, currency: "EUR" }
-    }
-  ];
+// const sortedData = operations.sort((a, b) => a.date > b.date);
+// console.log(sortedData);
 
+app.get("/api/operations", (req, res) => {
   res.json(operations);
 });
 
