@@ -28,14 +28,14 @@ const operations = [
     operation: { amount: 1000.0, currency: "EUR" }
   },
   {
-    date: "2016-01-07",
+    date: "2016-01-08",
     user_id: 1,
     user_type: "natural",
     type: "cash_out",
     operation: { amount: 100.0, currency: "EUR" }
   },
   {
-    date: "2016-01-10",
+    date: "2016-01-08",
     user_id: 1,
     user_type: "natural",
     type: "cash_out",

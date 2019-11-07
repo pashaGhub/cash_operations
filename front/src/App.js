@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 import Dashboard from "./components/Dashboard";
 
 const DEFAULT_OPERATION_INFO = {
@@ -68,27 +69,31 @@ function App() {
     return null;
   };
 
-  const cashOutNaturalFee = ({ date, user_id, user_type, type }) => {
+  const cashOutNaturalFee = ({ date, user_id, user_type, type, cash, ind }) => {
     if (cashOutNatural) {
       const {
         percents,
         week_limit: { amount }
       } = cashOutNatural;
+
       const weeklyCashOut = operations
         .filter(
-          opr =>
-            date >= opr.date &&
-            new Date(date) - new Date(opr.date) <= 7 &&
+          (opr, oprInd) =>
+            new Date(date) >= new Date(opr.date) &&
+            moment(new Date(opr.date)).isSame(new Date(date), "week") &&
+            ind !== oprInd &&
             user_id === opr.user_id &&
             user_type === opr.user_type &&
             type === opr.type
         )
         .reduce((res, current) => res + current.operation.amount, 0);
 
-      console.log(new Date(date));
-
-      return weeklyCashOut > amount
-        ? ((weeklyCashOut - amount) / 100) * percents
+      return weeklyCashOut > amount && weeklyCashOut !== cash
+        ? (cash / 100) * percents
+        : cash > amount
+        ? ((cash - amount) / 100) * percents
+        : weeklyCashOut > amount
+        ? (cash / 100) * percents
         : null;
     }
 

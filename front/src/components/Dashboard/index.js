@@ -36,7 +36,9 @@ function Dashboard({
                         date,
                         user_id,
                         user_type,
-                        type
+                        type,
+                        cash: amount,
+                        ind
                       })
                     )}
                   </li>
