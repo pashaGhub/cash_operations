@@ -70,7 +70,7 @@ function ContextProvider({ children }) {
         week_limit: { amount }
       } = cashOutNatural;
 
-      //counting the amount of cash-out money during the week until the current operation
+      //counting the amount of cash-out money of the same user during the week until the current operation
       const weeklyCashOut = operations
         .filter(
           (opr, oprInd) =>
