@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 
-import { API_ENDPOINTS } from "./constants";
+import { API_ENDPOINTS, APP_CONTEXT } from "./constants";
 
 //This function ordering array of objects by they provided key ascendingly
 const orderAscen = (arr, key) => {
@@ -16,21 +16,12 @@ const orderAscen = (arr, key) => {
   return arr.sort((a, b) => (a[key] > b[key] ? 1 : b[key] > a[key] ? -1 : 0));
 };
 
-const DEFAULT_OPERATION_INFO = {
-  date: Date, // operation date in format `Y-m-d`
-  user_id: Number, // user id, integer
-  user_type: String, // user type, one of “natural”(natural person) or “juridical”(legal person)
-  type: String, // operation type, one of “cash_in” or “cash_out”
-  operation: {
-    amount: Number, // operation amount(for example `2.12` or `3`)
-    currency: String // operation currency `EUR`
-  }
-};
-
 const AppContext = React.createContext();
 
 function ContextProvider({ children }) {
-  const [operations, setOperations] = useState([DEFAULT_OPERATION_INFO]);
+  const [operations, setOperations] = useState([
+    APP_CONTEXT.defaultOperationsInfo
+  ]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [cashIn, setCashIn] = useState(null);
@@ -43,8 +34,6 @@ function ContextProvider({ children }) {
 
       if (response.ok) {
         const json = await response.json();
-        console.log(json);
-
         callBack(json);
       } else {
         setError({ type: error, message: "Something went wrong 😥" });
