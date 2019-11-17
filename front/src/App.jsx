@@ -1,7 +1,7 @@
 import React from "react";
-import { ContextProvider } from "./AppContext";
+import { ContextProvider } from "./AppContext.js";
 
-import Layout from "./Layout";
+import { Layout } from "./Layout";
 
 function App() {
   return (
