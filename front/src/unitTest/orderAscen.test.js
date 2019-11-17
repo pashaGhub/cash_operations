@@ -1,4 +1,4 @@
-import { orderAscen } from "./AppContext";
+import { orderAscen } from "../AppContext";
 
 describe("orderAscen", () => {
   it("ordering provided array of object ascendingly by the provided key", () => {
